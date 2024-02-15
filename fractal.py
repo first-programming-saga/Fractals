@@ -56,7 +56,7 @@ class Fractal:
     """
     Fractal class
     """
-    default_xy =  [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 0)]
+    default_xy: list[Point] =  [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 0)]
     def __init__(self,afList:list[AF], xy = default_xy):
         self.__afList: list[AF] = afList
         self.__shapes:list[list[Point]] = [xy]
