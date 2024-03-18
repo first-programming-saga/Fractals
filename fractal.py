@@ -35,7 +35,7 @@ class AF:
         r = self.__m @ vv + self.__t
         return Point(r[0][0], r[1][0])
 
-    def transList(self,v_list:list[Point]) -> list[Point]:
+    def transList(self, v_list:list[Point]) -> list[Point]:
         """
         Translate list of points
 
@@ -72,7 +72,7 @@ class Fractal:
         self.__shapes.clear()
         self.__shapes = list(sp)
 
-    def getShapes(self)->list[pt.Polygon]:
+    def getShapes(self) -> list[pt.Polygon]:
         """
         Returns list of shapes as patch
         """
@@ -83,12 +83,12 @@ class Fractal:
 
     @staticmethod
     def _p2a(data:list[Point]) -> list[list[float]]:
-        result:list[list[float]]= list()
+        result:list[list[float]] = list()
         for p in data:
-            result.append([p.x,p.y])
+            result.append([p.x, p.y])
         return result
 
-    def getMap(self)->list[pt.Polygon]:
+    def getMap(self) -> list[pt.Polygon]:
         """
         Returns list of shapes for showing the map
         """
@@ -96,9 +96,9 @@ class Fractal:
         for af in self.__afList:
             sp.append(pt.Polygon(
                 Fractal._p2a(af.transList(Fractal.default_xy)),
-                fill =True, color='c',ec='black'))
+                fill =True, color='c', ec='black'))
             sp.append(pt.Polygon(
-                Fractal._p2a(af.transList([Point(0.1,0.1),Point(0.2,0.1),Point(0.1,0.3)])), 
+                Fractal._p2a(af.transList([Point(0.1,0.1), Point(0.2,0.1), Point(0.1,0.3)])), 
                 fill = True, color='r'))
         return sp
 
