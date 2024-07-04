@@ -19,7 +19,7 @@ class AF:
                 [r * math.sin(phi), s * math.cos(psi)]])
         self.__t: npt.NDArray = np.array([[e], [f]])
 
-    def trans(self, v:Point)->Point:
+    def translate(self, v:Point)->Point:
         """
         Translate one point
 
@@ -35,7 +35,7 @@ class AF:
         r = self.__m @ vv + self.__t
         return Point(r[0][0], r[1][0])
 
-    def transList(self, v_list:list[Point]) -> list[Point]:
+    def translate_list(self, v_list:list[Point]) -> list[Point]:
         """
         Translate list of points
 
@@ -49,7 +49,7 @@ class AF:
         """
         result:list[Point] = list()
         for v in v_list:
-            result.append(self.trans(v))
+            result.append(self.translate(v))
         return result        
 
 class Fractal:
@@ -68,7 +68,7 @@ class Fractal:
         sp = list()
         for xy in self.__shapes:
             for af in self.__afList:
-                sp.append(af.transList(xy))
+                sp.append(af.translate_list(xy))
         self.__shapes.clear()
         self.__shapes = list(sp)
 
@@ -95,10 +95,10 @@ class Fractal:
         sp = list()
         for af in self.__afList:
             sp.append(pt.Polygon(
-                Fractal._p2a(af.transList(Fractal.default_xy)),
+                Fractal._p2a(af.translate_list(Fractal.default_xy)),
                 fill =True, color='c', ec='black'))
             sp.append(pt.Polygon(
-                Fractal._p2a(af.transList([Point(0.1,0.1), Point(0.2,0.1), Point(0.1,0.3)])), 
+                Fractal._p2a(af.translate_list([Point(0.1,0.1), Point(0.2,0.1), Point(0.1,0.3)])), 
                 fill = True, color='r'))
         return sp
 
